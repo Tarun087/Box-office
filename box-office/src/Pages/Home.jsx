@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout';
+import ShowGrid from '../components/show/ShowGrid';
 import { getApi } from '../misc/config';
 
 function Home() {
@@ -30,11 +32,11 @@ function Home() {
       return <div>No Results ....</div>;
     }
     if (Results && Results.length > 0) {
-      return Results[0].show
-        ? Results.map(item => <div key={item.show.id}>{item.show.name}</div>)
-        : Results.map(item => (
-            <div key={item.person.id}>{item.person.name}</div>
-          ));
+      return Results[0].show ? (
+        <ShowGrid data={Results} />
+      ) : (
+        <ActorGrid data={Results} />
+      );
     }
     return null;
   };
